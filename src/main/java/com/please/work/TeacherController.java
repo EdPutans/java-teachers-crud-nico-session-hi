@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class TeacherController {
 
   @Autowired
-  TeacherService teacherService;
+  TeacherRepository teacherRepository;
 
- @GetMapping("/teachers")
+  @GetMapping("/teachers")
   public Collection<Teacher> getTeachers() {
-      return teacherService.getTeachers();
+      return teacherRepository.findAll();
     }
 
   @PostMapping("/teachers")
   public Teacher createTeacher(){
-   return teacherService.createTeacher();
+    Teacher newGuy = new Teacher("Nico, but in SQL", 34, true);
+    return teacherRepository.save(newGuy);
   }
 }
