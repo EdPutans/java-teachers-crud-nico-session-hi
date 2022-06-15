@@ -15,11 +15,11 @@ public class TeacherController {
 
   @GetMapping("/teachers")
   public Collection<Teacher> getTeachers() {
-      return teacherRepository.findAll();
-    }
+    return teacherRepository.findAll();
+  }
 
   @PostMapping("/teachers")
-  public Teacher createTeacher(){
+  public Teacher createTeacher() {
     Teacher newGuy = new Teacher("Nico, but in SQL", 34, true);
     return teacherRepository.save(newGuy);
   }
