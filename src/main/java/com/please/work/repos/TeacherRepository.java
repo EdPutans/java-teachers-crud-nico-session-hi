@@ -1,4 +1,4 @@
-package com.please.work;
+package com.please.work.repos;
 
 import javax.transaction.Transactional;
 
@@ -7,17 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Transactional
+import com.please.work.models.Teacher;
+
 @Repository
-public interface TeacherRepository {
-  @Autowired
-  SessionFactory sessionFactory;
+public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
-  public void save(Teacher teacher) {
-    Session session = sessionFactory.getCurrentSession();
-
-    session.save(teacher);
-  }
 }
 
 // @Transactional
