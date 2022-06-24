@@ -15,15 +15,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name = "teachers")
 public class Teacher implements Serializable {
-  @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "teacherid", unique = true, nullable = false)
+  @Id
   public Integer id;
 
   public String name;
@@ -48,12 +49,11 @@ public class Teacher implements Serializable {
   }
 
   @JsonIgnoreProperties("teachers")
-  @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-  @JoinTable(name = "teacher_student", joinColumns = {
-      @JoinColumn(name = "teacherid")
-  }, inverseJoinColumns = {
-      @JoinColumn(name = "studentid")
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {
+      CascadeType.MERGE
   })
+  @JoinTable(name = "teacher_students", joinColumns = { @JoinColumn(name = "teacher_id") }, inverseJoinColumns = {
+      @JoinColumn(name = "student_id") })
   public Set<Student> students = new HashSet<Student>();
 
 }

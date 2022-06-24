@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name = "students")
 public class Student implements Serializable {
-  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "studentid")
+  @Id
   public Integer id;
 
   public String name;
@@ -42,6 +43,8 @@ public class Student implements Serializable {
   }
 
   @JsonIgnoreProperties("students")
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "students", cascade = CascadeType.REMOVE)
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "students", cascade = {
+      CascadeType.MERGE
+  })
   public Set<Teacher> teachers = new HashSet<>();
 }

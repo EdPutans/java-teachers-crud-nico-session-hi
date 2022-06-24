@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.please.work.models.Teacher;
-import com.please.work.models.TeacherDTO;
 import com.please.work.repos.TeacherRepository;
 
 @RestController
@@ -22,15 +21,6 @@ public class TeacherController {
   @GetMapping("/teachers")
   public Collection<Teacher> getTeachers() {
     return teacherRepository.findAll();
-  }
-
-  @GetMapping("/teachers-dto")
-  public Collection<TeacherDTO> getTeachersDTO() {
-    return teacherRepository
-        .findAll()
-        .stream()
-        .map(teacher -> new TeacherDTO(teacher))
-        .collect(Collectors.toList());
   }
 
   @PostMapping("/teachers")

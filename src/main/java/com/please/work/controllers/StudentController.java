@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.please.work.models.Student;
-import com.please.work.models.StudentDTO;
 import com.please.work.repos.StudentRepository;
 
 @RestController
@@ -24,15 +23,6 @@ public class StudentController {
   @JsonIgnoreProperties("teachers")
   public Collection<Student> getStudents() {
     return studentsRepo.findAll();
-  }
-
-  @GetMapping("/students-dto")
-  public Collection<StudentDTO> getStudentsDTO() {
-    return studentsRepo
-        .findAll()
-        .stream()
-        .map(user -> new StudentDTO(user))
-        .collect(Collectors.toList());
   }
 
   @GetMapping("/teacherForStudentOne")
