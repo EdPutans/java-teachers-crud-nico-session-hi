@@ -43,8 +43,10 @@ public class Student implements Serializable {
   }
 
   @JsonIgnoreProperties("students")
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "students", cascade = {
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {
       CascadeType.MERGE
   })
-  public Set<Teacher> teachers = new HashSet<>();
+  @JoinTable(name = "student_teachers", joinColumns = { @JoinColumn(name = "student_id") }, inverseJoinColumns = {
+      @JoinColumn(name = "teacher_id") })
+  public Set<Teacher> teachers = new HashSet<Teacher>();
 }

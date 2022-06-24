@@ -40,23 +40,26 @@ public class TeacherLoader implements CommandLineRunner {
     Student Elona = new Student("Elona", 22);
     Student Steve = new Student("Steve", 28);
 
-    studentRepo.save(Gentrit);
-    studentRepo.save(Geri);
-    studentRepo.save(Elona);
-    studentRepo.save(Steve);
-
-    Nico.students.add(Gentrit);
-    Nico.students.add(Geri);
-    Nico.students.add(Elona);
-
-    Ed.students.add(Steve);
-    Ed.students.add(Geri);
-
-    // test to see if bidirectional works
-    // Geri.teachers.add(Nico);
-    // Gentrit.teachers.add(Nico);
-
     teacherRepo.save(Nico);
     teacherRepo.save(Ed);
+
+    Geri.teachers.add(Ed);
+    Geri.teachers.add(Nico);
+    studentRepo.save(Geri);
+
+    // studentRepo.save(Gentrit);
+    // studentRepo.save(Geri);
+    // studentRepo.save(Elona);
+    // studentRepo.save(Steve);
+
+    // Nico.students.add(Gentrit);
+    // Nico.students.add(Geri);
+    // Nico.students.add(Elona);
+
+    // Ed.students.add(Steve);
+    // Ed.students.add(Geri);
+
+    // teacherRepo.save(Nico);
+    // teacherRepo.save(Ed);
   }
 }
